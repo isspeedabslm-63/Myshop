@@ -10,34 +10,46 @@ app.config['SECRET_KEY']='keykey'
 db=SQLAlchemy(app)
 class User(db.Model,UserMixin):
     id=db.Column(db.Integer,primary_key=True)
-    username_or_email=db.Column(db.String(35),nullable=False)
+    first_name=db.Column(db.String(35),nullable=False)
+    last_name=db.Column(db.String(35),nullable=False)
+    age=db.Column(db.String(3),nullable=False)
+    username=db.Column(db.String(35),nullable=False)
+    email=db.Column(db.String(35),nullable=False, unique=True)
     password=db.Column(db.String(128),nullable=False)
-class RegisterFrom(FlaskForm):
+class RegisterForm(FlaskForm):
     first_name = StringField(validators=[InputRequired(),Length(min=5,max=25)],render_kw={"placeholder":"first_name"})
     last_name = StringField(validators=[InputRequired(),Length(min=5,max=25)],render_kw={"placeholder":"last_name"})
-    username_name = StringField(validators=[InputRequired(),Length(min=5,max=25)],render_kw={"placeholder":"username_name"})
+    age = StringField(validators=[InputRequired(),Length(min=1,max=3)],render_kw={"placeholder":"age"})
+    username= StringField(validators=[InputRequired(),Length(min=5,max=25)],render_kw={"placeholder":"username"})
+    email=EmailField(validators=[InputRequired(),Length(min=5,max=25)],render_kw={"placeholder":"username"})
     Password=PasswordField(validators=[InputRequired(),Length(min=6,max=20)], render_kw={"placeholder": "password"})
-    submit=SubmitField("Register")
-    def validate_username(self,username):
-        existing_user_username=user.query.filter_by(username=username.data).first()
-        if existing_user_username:
+    submit=SubmitField("Register")   
+    def validate_username(self,username):  #اذ كان يوجد اسم مكرر فلا يقبل ذالك
+        existing_user=User.query.filter_by(username=username.data).first()
+        if existing_user:
             raise ValidationError("change username in other name")
-class login(FlaskForm): 
+class LoginForm(FlaskForm): 
     username_name = StringField(validators=[InputRequired(),Length(min=5,max=25)],render_kw={"placeholder":"username_name"})
-    Password=PasswordField(validators=[InputRequired(),Length(min=6,max=20)], render_kw={"placeholder": "password"})
+    Password = PasswordField(validators=[InputRequired(),Length(min=6,max=20)], render_kw={"placeholder": "password"})
     submit=SubmitField("login")
 @app.route("/")
 def home():
     return render_template('home.html')
 @app.route('/login',methods=['GET','POST'])
-def login():
-    form=LoginForm
-    return render_template('login.html',form=form)   
+def login(): 
+     format=LoginForm
+     if form.validate_on_submit():
+        User= Use.query.filter_by(username=form.username.data)
+        if user and user.password ==form.password.data:
+            return redirect(url_for('home'))
+        else:
+           return render_template('login.html',form=form , error='user or password is wrong')   
+     return render_template('login.htlm',form=form)
 @app.route('/register',methods=['GET','POST'])
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-     new_user=User(username_or_email=form.username_name.data,password=form.password.data)
+     new_user=User(first_name=form.first_name.data, last_name=form.last_name.data, age=form.age.data,username=form.username.data, email=form.email.data ,password=form.password.data)
      db.session.add(new_user)
      db.session.commit()
      return redirect(url_for('login'))
@@ -46,4 +58,6 @@ def register():
 def about():
     return render_template("about.html")
 if __name__=="__main__":
-        app.run(debug=True)
+    with app.app_context():
+       db.create_all() #انشاء قاعدة بيانات تلقائية
+    app.run(debug=True) 

@@ -9,9 +9,8 @@
 
 <body>
     <h1>register page</h1>
-    <form action="/register" method="POST">
-        {{form.hiden_tag()}} <br> {{form.First_name(placeholder=" first_name " )}}<br> {{form.Last_name(placeholder=" Last_name " )}}<br>
-        <a href="{{url_for( 'login')}} "> i have account? login</a><br>
+    <form method="POST" action="">
+        {{form.hidden_tag()}}<br> {{form.first_name}}<br> {{form.last_name}}<br> {{form.username}}<br>{{form.age}}<br> {{form.email}}<br> {{form.Password}}<br> {{form.submit}}<br> <a href="{{url_for('login')}}"> i have account? login</a>
     </form>
 </body>
 
