@@ -8,10 +8,29 @@
 </head>
 
 <body>
-    <h1>register page</h1>
-    <form method="POST" action="">
-        {{form.hidden_tag()}}<br> {{form.first_name}}<br> {{form.last_name}}<br> {{form.username}}<br>{{form.age}}<br> {{form.email}}<br> {{form.password}}<br> {{form.submit}}<br> <a href="{{url_for('login')}}"> i have account? login</a>
-    </form>
+    <style>
+        body {
+            margin: auto;
+            font-size: 18px;
+            width: 36%;
+            padding: 50px;
+            text-align: left;
+            margin-left: 199px;
+        }
+        
+        input {
+            width: 28%;
+            margin: 12px;
+            padding: 10px;
+            font-size: 25px;
+            border-radius: 20px;
+        }
+    </style>
+    <div style=background:linear-gradient(135deg,#1e3c72,#2a5298);>
+        <h1>register page</h1>
+        <form method="POST " action=" ">
+            {{form.hidden_tag()}}<br> {{form.first_name}}<br> {{form.last_name}}<br> {{form.username}}<br>{{form.age}}<br> {{form.email}}<br> {{form.password}}<br> {{form.submit}}<br> <a href="{{url_for( 'login')}} "> i have account? login</a>
+        </form>
 </body>
 
 </html>

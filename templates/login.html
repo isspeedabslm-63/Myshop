@@ -8,14 +8,37 @@
 </head>
 
 <body>
-    <h1>login page</h1>
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <br> {{form.username}}
-        <br> {{form.Password}}
-        <br> {{form.submit}} <br>
-        <a href="{{url_for('register')}}"> don't have an account? register</a>
-    </form>
+    <style>
+        body {
+            margin: auto;
+            font-size: 20px;
+            width: 30%;
+            padding: 165px;
+            text-align: left;
+            margin-left: 80px;
+        }
+        
+        input {
+            width: 32%;
+            margin: 11px;
+            padding: 10px;
+            font-size: 25px;
+        }
+    </style>
+    <div style=background:linear-gradient(135deg,#1e3c72,#0a162b);>
+        <h1>login page</h1>
+
+        <form method="POST"> {{form.hidden_tag()}}
+            <br> {{form.username}}
+
+            <br> {{form.password}}
+
+            <br> {{form.submit}}
+
+            <br><a href="{{url_for('register')}} " style="color:#1a73e8;">don't have an account? register</a>
+
+        </form>
+    </div>
 </body>
 
 </html>
