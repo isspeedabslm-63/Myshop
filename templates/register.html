@@ -4,33 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register</title>
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 
 <body>
-    <style>
-        body {
-            margin: auto;
-            font-size: 18px;
-            width: 36%;
-            padding: 50px;
-            text-align: left;
-            margin-left: 199px;
-        }
-        
-        input {
-            width: 28%;
-            margin: 12px;
-            padding: 10px;
-            font-size: 25px;
-            border-radius: 20px;
-        }
-    </style>
-    <div style=background:linear-gradient(135deg,#1e3c72,#2a5298);>
-        <h1>register page</h1>
+
+    <div class="login-container">
+        <h2>📝 Create Account</h2>
+
         <form method="POST " action=" ">
             {{form.hidden_tag()}}<br> {{form.first_name}}<br> {{form.last_name}}<br> {{form.username}}<br>{{form.age}}<br> {{form.email}}<br> {{form.password}}<br> {{form.submit}}<br> <a href="{{url_for( 'login')}} "> i have account? login</a>
         </form>
+
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+
 </body>
 
 </html>
