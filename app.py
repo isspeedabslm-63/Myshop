@@ -1,4 +1,4 @@
-from flask import Flask ,render_template,redirect,url_for,session
+from flask import Flask ,render_template,redirect,url_for,session,request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, login_required, LoginManager,logout_user,current_user
 from flask_wtf import FlaskForm
@@ -33,6 +33,7 @@ class Product(db.Model):
     name=db.Column(db.String(100),nullable=False)#يمنع ان يكون فارغ
     price=db.Column(db.Float,nullable=False)
     descripition=db.Column(db.String(250))
+    category=db.Column(db.String(50))
 class RegisterForm(FlaskForm):
     first_name = StringField(validators=[InputRequired(),Length(min=3,max=25)],render_kw={"placeholder":"first_name"})
     last_name = StringField(validators=[InputRequired(),Length(min=3,max=25)],render_kw={"placeholder":"last_name"})
@@ -64,11 +65,20 @@ def login():
         else:
            return render_template('login.html',form=form , error='Invalid username or password')   
      return render_template('login.html',form=form)
-@app.route('/dash',methods=['GET','POST'])
-@login_required  
+@app.route("/dash")
+@login_required
 def dash():
-    products = Product.query.all()
-    return render_template('dash.html', products=products) #دخول الى الصفحة
+
+    category = request.args.get("category")
+
+    if category:
+        products = Product.query.filter_by(category=category).all()
+    else:
+        products = Product.query.all()
+
+    return render_template("dash.html", products=products, current_category=category)#دخول الى الصفحة
+
+
 @app.route('/logout',methods=['GET','POST'])
 @login_required
 def logout():
@@ -176,6 +186,11 @@ def checkout():
 def confirm_order():
     session.pop('cart', None) 
     return render_template('success.html')
+#صناعة اكثر من صفحة
+@app.route("/category/<string:page>")
+def category(page):
+    products = Product.query.filter_by(category=page).all()
+    return render_template("dash.html", products=products, current_category=page)
 if __name__=="__main__":
  with app.app_context():
     db.create_all()

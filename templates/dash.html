@@ -2,38 +2,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - MyShop DZ</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Story+Script&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='dash.css') }}">
 </head>
 
 <body>
 
-    <!-- ===== NAVBAR ===== -->
+    <!-- NAVBAR -->
     <header class="navbar">
 
         <h1>MYshop.DZ</h1>
 
-        <!-- SEARCH -->
         <input type="text" placeholder="Search products..." class="search">
 
-        <!-- NAV LINKS -->
         <nav class="nav-links">
 
             <a href="/">Home</a>
 
             <a href="{{ url_for('cart') }}">
-            🛒 Cart ({{ session['cart']|length if session.get('cart') else 0 }})
-        </a>
-
-            <a href="#">Phones</a>
-            <a href="#">Laptops</a>
-            <a href="#">Accessories</a> {% if current_user.is_authenticated %}
-            <a href="/dash">Dashboard</a>
-            <a href="/logout" class="logout">Logout</a> {% else %}
+            🛒 Cart ({{ session.get('cart', {})|length }})
+        </a> {% if current_user.is_authenticated %}
+            <a href="/logout">Logout</a> {% else %}
             <a href="/login">Login</a>
             <a href="/register">Register</a> {% endif %}
 
@@ -41,38 +33,36 @@
 
     </header>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-        <h1>Latest Tech, Best Prices</h1>
-        <p>Discover top smartphones and powerful computers</p>
-        <a href="#products">
-            <button>🛍 Shop Now</button>
-        </a>
-    </section>
+    <!-- CATEGORIES -->
+    <div class="categories">
 
-    <!-- ===== PRODUCTS ===== -->
-    <section class="products" id="products">
+        <a href="{{ url_for('dash') }}" class="cat">All</a>
+
+        <a href="/category/Phones" class="cat">Phones</a>
+
+        <a href="/category/Laptops" class="cat">Laptops</a>
+
+    </div>
+
+    <!-- PRODUCTS -->
+    <section class="products">
 
         {% for product in products %}
         <div class="card">
 
-            <div class="img-box">
-                <img src="{{ url_for('static', filename='image/' + product.image) }}">
-            </div>
+            <img src="{{ url_for('static', filename='image/' + product.image) }}">
 
             <h3>{{ product.name }}</h3>
 
-            <p>{{ product.description }}</p>
+            <p>{{ product.descripition }}</p>
 
             <p class="price">${{ product.price }}</p>
 
             <a href="{{ url_for('add_to_cart', product_id=product.id) }}">
-                <button class="buy-btn">🛒 Add to Cart</button>
+                <button>Add to Cart</button>
             </a>
 
         </div>
-        {% else %}
-        <p style="color:white;">No products available</p>
         {% endfor %}
 
     </section>
