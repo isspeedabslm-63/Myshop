@@ -1,4 +1,8 @@
 /* RESET */
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +15,13 @@ body {
     color: rgb(248, 248, 248);
 }
 
+<<<<<<< HEAD
+
 /* HEADER */
+
+=======
+/* HEADER */
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 header {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
@@ -22,9 +32,15 @@ header {
 }
 
 header h1 {
+<<<<<<< HEAD
+    font-family: "Story Script", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+=======
   font-family: "Story Script", sans-serif;
   font-weight: 400;
   font-style: normal;
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 }
 
 nav a {
@@ -42,20 +58,36 @@ nav a:hover {
 
 
 /* TITLE */
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 .title {
     text-align: center;
     margin: 25px 0;
     color: #38bdf8;
 }
 
+<<<<<<< HEAD
+
 /* CART */
+
+=======
+/* CART */
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 .cart-container {
     max-width: 900px;
     margin: auto;
     padding: 10px;
 }
 
+<<<<<<< HEAD
+
 /* CART CARD */
+
+=======
+/* CART CARD */
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 .cart-card {
     display: flex;
     align-items: center;
@@ -64,7 +96,11 @@ nav a:hover {
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 15px;
+<<<<<<< HEAD
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+=======
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 }
 
 .product-img {
@@ -88,7 +124,13 @@ nav a:hover {
     font-weight: bold;
 }
 
+<<<<<<< HEAD
+
 /* REMOVE BUTTON */
+
+=======
+/* REMOVE BUTTON */
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 .remove-btn {
     background: #ef4444;
     padding: 8px 12px;
@@ -96,6 +138,17 @@ nav a:hover {
     color: white;
     text-decoration: none;
     transition: 0.3s;
+<<<<<<< HEAD
+}
+
+.remove-btn:hover {
+    background: #dc2626;
+}
+
+
+/* EMPTY */
+
+=======
 }
 
 .remove-btn:hover {
@@ -103,12 +156,19 @@ nav a:hover {
 }
 
 /* EMPTY */
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 .empty {
     text-align: center;
     color: #94a3b8;
 }
 
+<<<<<<< HEAD
+
 /* SUMMARY */
+
+=======
+/* SUMMARY */
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 .summary {
     text-align: center;
     margin: 30px;
@@ -121,7 +181,13 @@ nav a:hover {
     color: #22c55e;
 }
 
+<<<<<<< HEAD
+
 /* BUTTONS */
+
+=======
+/* BUTTONS */
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 .checkout-btn {
     display: inline-block;
     margin-top: 10px;

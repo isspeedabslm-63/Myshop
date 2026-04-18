@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY SHOP </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sekuya&family=Story+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sty.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1> MYshop.DZ </h1>
+        <nav>
+            HOME PAGE</a>
+            {% if current_user.is_authenticated %}
+            <a href="/dashboard">CONTROL PANEL</a>
+            <a href="/login">LOG IN</a>
+            <a href="/register">REGISTER AN ACOUNT</a> {% endif %}
+        </nav>
+        <h1 class="typing">WELCOME TO MYSHOP DZ</h1>
+
+    </header>
+    </div>
+
+</body>
+
+</html>

@@ -12,6 +12,62 @@
 
 <body>
 
+<<<<<<< HEAD
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <h1>Myshop.Dz</h1>
+
+        <nav>
+            <a href="{{ url_for('dash') }}">SHOP</a>
+            <a href="{{ url_for('checkout') }}">CHECKOUT</a>
+        </nav>
+    </header>
+
+    <!-- CART TITLE -->
+    <h2 class="title">🛒 Your Cart</h2>
+
+    <!-- CART CONTAINER -->
+    <div class="cart-container">
+
+        {% for item in products %}
+        <div class="cart-card">
+
+            {% if item.product.image %}
+            <img class="product-img" src="{{ url_for('static', filename='image/' + item.product.image) }}"> {% endif %}
+
+            <div class="info">
+                <h3>{{ item.product.name }}</h3>
+                <p class="price">Price: ${{ item.product.price }}</p>
+                <p>Quantity: <b>{{ item.quantity }}</b></p>
+                <p class="subtotal">Subtotal: ${{ item.subtotal }}</p>
+            </div>
+
+            <div class="actions">
+                <a class="remove-btn" href="{{ url_for('remove_from_cart', product_id=item.product.id) }}">
+                ✖ Remove
+            </a>
+            </div>
+
+        </div>
+        {% else %}
+        <p class="empty">Your cart is empty 😢</p>
+        {% endfor %}
+
+    </div>
+
+    <!-- TOTAL -->
+    <div class="summary">
+        <h3>Total: <span>${{ total }}</span></h3>
+
+        <a class="checkout-btn" href="{{ url_for('checkout') }}">
+        💳 Checkout
+    </a>
+
+        <a class="continue-btn" href="{{ url_for('dash') }}">
+        ⬅ Continue Shopping
+    </a>
+    </div>
+=======
 <!-- NAVBAR -->
 <header class="navbar">
     <h1>Myshop.Dz</h1>
@@ -69,6 +125,7 @@
         ⬅ Continue Shopping
     </a>
 </div>
+>>>>>>> 4d7430a4848db846856a2e1ad40cda446952de7b
 
 </body>
 </html>
