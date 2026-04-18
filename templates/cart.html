@@ -4,75 +4,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='cart.css') }}">
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <h1>Myshop.Dz</h1>
+<!-- NAVBAR -->
+<header class="navbar">
+    <h1>Myshop.Dz</h1>
 
-        <nav>
-            <a href="{{ url_for('dash') }}">SHOP</a>
-            <a href="{{ url_for('checkout') }}">CHECKOUT</a>
-        </nav>
-    </header>
+    <nav>
+        <a href="{{ url_for('dash') }}">SHOP</a>
+    </nav>
+</header>
 
-    <!-- TITLE -->
-    <h2 class="title">🛒 Your Cart</h2>
+<h2 class="title">🛒 Your Cart</h2>
 
-    <!-- CART CONTENT -->
-    <div class="cart-container">
+<!-- CART ITEMS -->
+<div class="cart-container">
 
-        {% for item in products %}
-        <div class="cart-card">
+    {% for item in products %}
+    <div class="cart-card">
 
-            {% if item.product.image %}
-            <img class="product-img" src="{{ url_for('static', filename='image/' + item.product.image) }}"> {% endif %}
+        {% if item.product.image %}
+        <img class="product-img" src="{{ url_for('static', filename='image/' + item.product.image) }}">
+        {% endif %}
 
-            <div class="info">
-                <h3>{{ item.product.name }}</h3>
-                <p class="price">Price: ${{ item.product.price }}</p>
-                <div class="qty-box">
+        <div class="info">
+            <h3>{{ item.product.name }}</h3>
+            <p>${{ item.product.price }}</p>
 
-                    <a class="qty-btn" href="{{ url_for('update_cart', product_id=item.product.id, action='decrease') }}">-</a>
-
-                    <span class="qty">{{ item.quantity }}</span>
-
-                    <a class="qty-btn" href="{{ url_for('update_cart', product_id=item.product.id, action='increase') }}">+</a>
-
-                </div>
-                <p class="subtotal">Subtotal: ${{ item.subtotal }}</p>
+            <div class="qty-box">
+                <a href="{{ url_for('update_cart', product_id=item.product.id, action='decrease') }}">-</a>
+                <span>{{ item.quantity }}</span>
+                <a href="{{ url_for('update_cart', product_id=item.product.id, action='increase') }}">+</a>
             </div>
 
-            <div class="actions">
-                <a class="remove-btn" href="{{ url_for('remove_from_cart', product_id=item.product.id) }}">
-                    ✖ Remove
-                </a>
-            </div>
-
+            <p>Subtotal: ${{ item.subtotal }}</p>
         </div>
-        {% else %}
-        <p class="empty">Your cart is empty 😢</p>
-        {% endfor %}
+
+        <a class="remove-btn" href="{{ url_for('remove_from_cart', product_id=item.product.id) }}">❌</a>
 
     </div>
+    {% else %}
+    <p>Your cart is empty 😢</p>
+    {% endfor %}
 
-    <!-- TOTAL -->
-    <div class="summary">
-        <h3>Total: <span>${{ total }}</span></h3>
+</div>
 
-        <a class="checkout-btn" href="{{ url_for('checkout') }}">
-            💳 Checkout
-        </a>
+<!-- TOTAL -->
+<div class="summary">
+    <h2>Total: ${{ total }}</h2>
+</div>
 
-        <a class="continue-btn" href="{{ url_for('dash') }}">
-            ⬅ Continue Shopping
-        </a>
-    </div>
+<!-- 🚚 DELIVERY + CONFIRM -->
+<div class="delivery-box">
+
+    <h2>🚚 Delivery Information</h2>
+
+    <form method="POST" action="{{ url_for('confirm_order') }}">
+
+        <input type="text" name="name" placeholder="Full Name" required>
+
+        <input type="text" name="phone" placeholder="Phone Number" required>
+
+        <input type="text" name="address" placeholder="Address" required>
+
+        <select name="city" required>
+            <option disabled selected>🏙️ Select Wilaya</option>
+
+            <option>Adrar</option>
+            <option>Chlef</option>
+            <option>Laghouat</option>
+            <option>Oum El Bouaghi</option>
+            <option>Batna</option>
+            <option>Béjaïa</option>
+            <option>Biskra</option>
+            <option>Béchar</option>
+            <option>Blida</option>
+            <option>Bouira</option>
+            <option>Algiers</option>
+            <option>Oran</option>
+            <option>Constantine</option>
+            <option>Sétif</option>
+            <option>Annaba</option>
+            <option>Skikda</option>
+        </select>
+
+        <button type="submit">🚚 Confirm Order</button>
+
+    </form>
+
+</div>
 
 </body>
-
 </html>
